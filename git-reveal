@@ -29,27 +29,55 @@ def scanForRepos(verbose):
     root = dic[0]        
     dirs = dic[1]
     
+    gitReposFound=False
+    repositories = []
+    
     for dir in dirs:
         fullDir=os.path.abspath(os.path.join(root, dir))
         if os.path.exists(fullDir + "/.git"):
-            revealRepo(fullDir, verbose)
-                        
+            gitReposFound=True
+            if hasChanges(fullDir):
+                repositories.append(fullDir)
+                
+    if not gitReposFound:
+        print "no git repositories found"
+    else:
+        if len(repositories) > 0:
+            print "changes detected in:\n"
+        else:
+            print "no changes found"
+
+    for repository in repositories:
+        revealRepo(repository, verbose)
+        
+    if not verbose:
+        print ""
+        
+        
+def hasChanges(repo): 
+    command = "cd '" + repo + "'; git status -b"
+    output = subprocess.check_output(command, shell=True)
+    
+    if "nothing" in output:
+        return False
+    else:
+        return True    
+
 
 def revealRepo(dir, verbose):
-    command = "cd '" + dir + "'; git status -b"
-    output = subprocess.check_output(command, shell=True)
-    if "nothing" not in output:
-        command2 = 'echo "$(tput setaf 1)' + dir + '$(tput sgr0)"'
-        print subprocess.check_output(command2, shell=True).strip()
+    command = 'echo "$(tput setaf 1)' + dir + '$(tput sgr0)"'
+    print subprocess.check_output(command, shell=True).strip()
         
-        if verbose:
-            command3 =  "cd '" + dir + "'; git status -s"
-            print subprocess.check_output(command3, shell=True).strip() 
-            print ""
+    if verbose:
+        command2 = "cd '" + dir + "'; git status -s"
+        print subprocess.check_output(command2, shell=True).strip() 
+        print ""
                                  
 
 def usage():
     print "usage: git-reveal [-hv]"
+    print "       -v verbose    show all changed files"
+    print "       -h help       show help"
     sys.exit(2)    
 
 

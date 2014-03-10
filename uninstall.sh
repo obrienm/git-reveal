@@ -3,3 +3,4 @@
 rm /usr/bin/git-reveal
 
 echo "done"
+
