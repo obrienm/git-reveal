@@ -25,8 +25,8 @@ Verbose
 	
 ## Install
 
-sud0 ./install.sh
-sud0 ./uninstall.sh
+	$ sud0 ./install.sh
+	$ sud0 ./uninstall.sh
 
 ## Dependencies
 git version 1.8.3.4
