@@ -30,7 +30,7 @@ Verbose
 	$ sud0 ./uninstall.sh
 
 ## Dependencies
-Tested on
+Tested with
 
 	python 2.7.5
 	git version 1.8.3.4
