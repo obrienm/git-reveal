@@ -15,7 +15,6 @@ Verbose
 		
 	$ git-reveal -v
 	changes detected in:
-	
 	 /home/you/my-code-dir/repo1
 	 M README.md
 
