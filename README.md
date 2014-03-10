@@ -2,7 +2,7 @@
 
 **git-reveal** is used to summarise all the git repositories within a directory.
 
-## example
+## Example
 
 	> cd my-code-dir
 	> git-reveal
@@ -21,9 +21,9 @@
 	  M src/main/scala/HelloWorld.scala
 	  ?? somefile
 	
-## install
+## Install
 
 sud0 ./install.sh
 
-## dependencies
+## Dependencies
 git version 1.8.3.4
