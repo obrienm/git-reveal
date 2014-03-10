@@ -1,6 +1,6 @@
 # git-reveal
 
-**git-reveal** finds all the git repositories in the current directory and reveals whether they have any changes
+**git-reveal** finds all the git repositories in the current directory and reveals whether they have any changes to be commit.
 
 ## Example
 
