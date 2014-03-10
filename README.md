@@ -1,6 +1,6 @@
 # git-reveal
 
-**git-reveal** is used to summarise all the git repositories within a directory.
+**git-reveal** finds all the git repositories in the current directory and reveals whether they have any changes
 
 ## Example
 
