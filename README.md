@@ -7,17 +7,17 @@
 	> cd my-code-dir
 	> git-reveal
 	  changes detected in:
-	  	**/home/you/my-code-dir/repo1**
-		**/home/you/my-code-dir/repo2**
-		**/home/you/my-code-dir/repo3**
+	  	/home/you/my-code-dir/repo1
+		/home/you/my-code-dir/repo2
+		/home/you/my-code-dir/repo3
 		
 	> git-reveal -v
-	  changes detected in:**
+	  changes detected in:
 	
-	  **/home/you/my-code-dir/repo1**
+	  /home/you/my-code-dir/repo1
 	  M README.md
 
-	  **/home/you/my-code-dir/repo2**
+	  /home/you/my-code-dir/repo2
 	  M src/main/scala/HelloWorld.scala
 	  ?? somefile
 	
