@@ -1,45 +1,57 @@
-#!/bin/bash
+#!/usr/bin/python
 
-if [[ $* == *-h* ]] || [[ $* == *--help* ]]; then
-	echo "usage: git-reveal [-vh]"					
-else
-	
-	changesDetected=false
+import getopt, sys, os, subprocess
 
-	defaultColour=$(tput sgr0)
-	red=$(tput setaf 1)
-	
-	declare -a arr=($(find `pwd` -maxdepth 1 -type d))
-	
-	for i in "${arr[@]}"; do
-		cd $i
 
-		# is this a git dir
-		if [ -d .git ]; then
+def main():
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hv", ["help", "verbose"])
+    except getopt.GetoptError as err:
+        print str(err)
+        usage()
+        
+    verbose=False    
+    for o, a in opts:
+        if o == "-v":
+            verbose=True
+        elif o in ("-h", "--help"):
+            usage()
+        else:
+            assert False, "unhandled option"
+            usage()
+    
+    scanForRepos(verbose)
 
-			declare -a gitstatus=`git status -b`
-			if [[ $gitstatus != *nothing* ]]; then
-				
-				# only show this message once
-				if ! $changesDetected ; then
-					echo "changes detected in:"
-					changesDetected=true
-				fi
-				
-				# which repos have changes
-				echo "$red $i $defaultColour"
-				
-				# -v verbose, show changes
-				if [[ $* == *-v* ]]; then
-					git status -s
-					echo ""					
-				fi
-			fi
-		fi
-	done
 
-	if ! $changesDetected ; then
-		echo "no changed detected"
-	fi
+def scanForRepos(verbose):
 
-fi
+    dic = os.walk('.').next()
+    root = dic[0]        
+    dirs = dic[1]
+    
+    for dir in dirs:
+        fullDir=os.path.abspath(os.path.join(root, dir))
+        if os.path.exists(fullDir + "/.git"):
+            revealRepo(fullDir, verbose)
+                        
+
+def revealRepo(dir, verbose):
+    command = "cd '" + dir + "'; git status -b"
+    output = subprocess.check_output(command, shell=True)
+    if "nothing" not in output:
+        command2 = 'echo "$(tput setaf 1)' + dir + '$(tput sgr0)"'
+        print subprocess.check_output(command2, shell=True).strip()
+        
+        if verbose:
+            command3 =  "cd '" + dir + "'; git status -s"
+            print subprocess.check_output(command3, shell=True).strip() 
+            print ""
+                                 
+
+def usage():
+    print "usage: git-reveal [-hv]"
+    sys.exit(2)    
+
+
+if __name__ == "__main__":
+    main()
