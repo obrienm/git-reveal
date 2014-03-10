@@ -12,29 +12,29 @@ else
 	declare -a arr=($(find `pwd` -maxdepth 1 -type d))
 	
 	for i in "${arr[@]}"; do
-	    cd $i
+		cd $i
 
 		# is this a git dir
 		if [ -d .git ]; then
 
-	    		declare -a gitstatus=`git status -b`
-	    		if [[ $gitstatus != *nothing* ]]; then
+			declare -a gitstatus=`git status -b`
+			if [[ $gitstatus != *nothing* ]]; then
 				
-					# only show this message once
-					if ! $changesDetected ; then
-						echo "changes detected in:"
-						changesDetected=true
-					fi
-				
-					# which repos have changes
-					echo "$red $i $defaultColour"
-				
-					# -v verbose, show changes
-					if [[ $* == *-v* ]]; then
-						git status -s
-						echo ""					
-					fi
+				# only show this message once
+				if ! $changesDetected ; then
+					echo "changes detected in:"
+					changesDetected=true
 				fi
+				
+				# which repos have changes
+				echo "$red $i $defaultColour"
+				
+				# -v verbose, show changes
+				if [[ $* == *-v* ]]; then
+					git status -s
+					echo ""					
+				fi
+			fi
 		fi
 	done
 
