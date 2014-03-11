@@ -80,7 +80,7 @@ def show(repos, verbose):
                 command = "cd '" + repo + "'; git status -s"
                 execute(command)
         else:
-            command = 'echo "$(tput setaf 8)' + repo + '$(tput sgr0)"'
+            command = 'echo "' + repo + '"'
             execute(command)
     
     
