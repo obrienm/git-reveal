@@ -56,7 +56,7 @@ def hasChanges(repo):
     command = "cd '" + repo + "'; git status -b"
     output = subprocess.check_output(command, shell=True)
     
-    if "nothing" in output:
+    if "nothing to commit, working directory clean" in output:
         return False
     else:
         return True    
@@ -67,7 +67,7 @@ def summary(repos):
     repStr = "repositories"
     if len(repos) == 1:
         repStr = "repository"
-        
+    
     command = 'echo "summary: ' + str(len(repos)) + ' ' + repStr + ', ' + str(len(reposWithChanges)) + ' with changes"'
     execute(command)
 
