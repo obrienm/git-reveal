@@ -6,23 +6,21 @@
 
 	$ cd my-code-dir
 	$ git-reveal
-	changes detected in:
-	
 	/home/you/my-code-dir/repo1
-	/home/you/my-code-dir/repo2
-	/home/you/my-code-dir/repo3
+	/home/you/my-code-dir/repo2 [changed]
+	/home/you/my-code-dir/repo3 [changed]
+	summary: 3 repositories, 2 with changes
 		
 Verbose
 		
 	$ git-reveal -v
-	changes detected in:
-	
 	/home/you/my-code-dir/repo1
+	/home/you/my-code-dir/repo2 [changed]
 	M README.md
-
-	/home/you/my-code-dir/repo2
+	/home/you/my-code-dir/repo3 [changed]
 	M src/main/scala/HelloWorld.scala
 	?? somefile
+	summary: 3 repositories, 2 with changes
 	
 ## Install
 
@@ -34,7 +32,3 @@ Tested with
 
 	python 2.7.5
 	git version 1.8.3.4
-	
-## To do
--a --all shows all repos, red for ones with changes, green for those without
-show a summary line e.g. 22 repos, 3 with changes

@@ -4,48 +4,49 @@ import getopt, sys, os, subprocess
 
 
 def main():
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "hv", ["help", "verbose"])
-    except getopt.GetoptError as err:
-        print str(err)
-        usage()
-        
-    verbose=False    
+    opts, args = getOpts(sys.argv[1:])
+    verbose = parseOpts(opts)    
+    repos = findRepos(verbose)
+    show(repos, verbose)
+    summary(repos)
+
+
+def parseOpts(opts):
+    verbose = False
     for o, a in opts:
         if o == "-v":
-            verbose=True
+            verbose = True
         elif o in ("-h", "--help"):
             usage()
         else:
             assert False, "unhandled option"
             usage()
-    
-    scanForRepos(verbose)
+            
+    return verbose
+            
+
+def getOpts(argv):
+    try:
+        return getopt.getopt(argv, "hv", ["help", "verbose"])
+    except getopt.GetoptError as err:
+        print str(err)
+        usage()
 
 
-def scanForRepos(verbose):
-
+def findRepos(verbose):
     dic = os.walk('.').next()
     root = dic[0]        
     dirs = dic[1]
-    dirs.append(".") #pwd
+    dirs.append(".")
     
     absoluteDirs = map(lambda dir: os.path.abspath(os.path.join(root, dir)), dirs)
-    repos = filter(lambda dir: os.path.exists(dir + "/.git"), absoluteDirs)
-    reposWithChanges = filter(lambda repo: hasChanges(repo), repos)
-                
-    if len(repos) == 0:
-        print "no git repositories found"
-    else:
-        if len(reposWithChanges) > 0:
-            print "changes detected in:"
-        else:
-            print "\nno changes found"
+    return filter(lambda dir: os.path.exists(dir + "/.git"), absoluteDirs)
 
-    for repository in reposWithChanges:
-        revealRepo(repository, verbose)
-        
-        
+
+def findReposWithChanges(repos):
+    return filter(lambda repo: hasChanges(repo), repos)
+
+
 def hasChanges(repo): 
     command = "cd '" + repo + "'; git status -b"
     output = subprocess.check_output(command, shell=True)
@@ -56,15 +57,32 @@ def hasChanges(repo):
         return True    
 
 
-def revealRepo(dir, verbose):
-    command = 'echo "$(tput setaf 1)' + dir + '$(tput sgr0)"'
-    print subprocess.check_output(command, shell=True).strip()
+def summary(repos):
+    reposWithChanges = findReposWithChanges(repos)
+    repStr = "repositories"
+    if len(repos) == 1:
+        repStr = "repository"
         
-    if verbose:
-        command2 = "cd '" + dir + "'; git status -s"
-        print subprocess.check_output(command2, shell=True).strip() 
-        print ""
-                                 
+    command = 'echo "summary: ' + str(len(repos)) + ' ' + repStr + ', ' + str(len(reposWithChanges)) + ' with changes"'
+    execute(command)
+
+def show(repos, verbose):
+    for repo in repos:
+        if hasChanges(repo):
+            command = 'echo "$(tput setaf 1)' + repo + ' [changed] $(tput sgr0)"'
+            execute(command)
+            if verbose:
+                command = "cd '" + repo + "'; git status -s"
+                execute(command)
+        else:
+            command = 'echo "$(tput setaf 8)' + repo + '$(tput sgr0)"'
+            execute(command)
+    
+    
+
+def execute(command):
+    print subprocess.check_output(command, shell=True).strip()  
+ 
 
 def usage():
     print "usage: git-reveal [-hv]"
