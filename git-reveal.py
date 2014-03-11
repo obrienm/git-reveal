@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+# a@moschops.me
+# https://github.com/obrienm
+#
+# Finds all git repositories in the current directory and reveals whether they have any changes to be commit.
+
 import getopt, sys, os, subprocess
 
 
