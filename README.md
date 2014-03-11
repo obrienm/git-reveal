@@ -18,7 +18,6 @@ Verbose
 	/home/you/my-code-dir/repo2 [changed]
 	M README.md
 	/home/you/my-code-dir/repo3 [changed]
-	M src/main/scala/HelloWorld.scala
 	?? somefile
 	summary: 3 repositories, 2 with changes
 	
