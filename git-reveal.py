@@ -43,12 +43,8 @@ def findRepos(verbose):
     root = dic[0]        
     dirs = dic[1]
     dirs.append(".")
-    
-    return filter(lambda dir: os.path.exists(absolutDir(dir, root) + "/.git"), dirs)
 
-
-def absolutDir(dir, root):
-    return os.path.abspath(os.path.join(root, dir))
+    return filter(lambda dir: os.path.exists(dir + "/.git"), dirs)
 
 
 def findReposWithChanges(repos):

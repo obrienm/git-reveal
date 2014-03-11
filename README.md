@@ -6,18 +6,19 @@
 
 	$ cd my-code-dir
 	$ git-reveal
-	/home/you/my-code-dir/repo1
-	/home/you/my-code-dir/repo2 [changed]
-	/home/you/my-code-dir/repo3 [changed]
+	repo1
+	repo2 [changed]
+	repo3 [changed]
 	summary: 3 repositories, 2 with changes
 		
 Verbose
-		
+	
+	$ cd my-code-dir
 	$ git-reveal -v
-	/home/you/my-code-dir/repo1
-	/home/you/my-code-dir/repo2 [changed]
+	repo1
+	repo2 [changed]
 	M README.md
-	/home/you/my-code-dir/repo3 [changed]
+	repo3 [changed]
 	?? somefile
 	summary: 3 repositories, 2 with changes
 	
