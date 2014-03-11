@@ -4,7 +4,6 @@
 
 ## Example
 
-	$ cd my-code-dir
 	$ git-reveal
 	repo1
 	repo2 [changed]
@@ -13,7 +12,6 @@
 		
 Verbose
 	
-	$ cd my-code-dir
 	$ git-reveal -v
 	repo1
 	repo2 [changed]
