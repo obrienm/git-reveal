@@ -44,8 +44,11 @@ def findRepos(verbose):
     dirs = dic[1]
     dirs.append(".")
     
-    absoluteDirs = map(lambda dir: os.path.abspath(os.path.join(root, dir)), dirs)
-    return filter(lambda dir: os.path.exists(dir + "/.git"), absoluteDirs)
+    return filter(lambda dir: os.path.exists(absolutDir(dir, root) + "/.git"), dirs)
+
+
+def absolutDir(dir, root):
+    return os.path.abspath(os.path.join(root, dir))
 
 
 def findReposWithChanges(repos):
@@ -82,7 +85,6 @@ def show(repos, verbose):
         else:
             command = 'echo "' + repo + '"'
             execute(command)
-    
     
 
 def execute(command):
