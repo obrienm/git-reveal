@@ -34,3 +34,7 @@ Tested with
 
 	python 2.7.5
 	git version 1.8.3.4
+	
+## To do
+-a --all shows all repos, red for ones with changes, green for those without
+show a summary line e.g. 22 repos, 3 with changes

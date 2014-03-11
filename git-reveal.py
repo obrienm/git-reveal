@@ -30,23 +30,17 @@ def scanForRepos(verbose):
     dirs = dic[1]
     dirs.append(".") #pwd
     
-    gitReposFound=False
-    reposWithChanges = []
-    
-    for dir in dirs:
-        fullDir=os.path.abspath(os.path.join(root, dir))
-        if os.path.exists(fullDir + "/.git"):
-            gitReposFound=True
-            if hasChanges(fullDir):
-                reposWithChanges.append(fullDir)
+    absoluteDirs = map(lambda dir: os.path.abspath(os.path.join(root, dir)), dirs)
+    repos = filter(lambda dir: os.path.exists(dir + "/.git"), absoluteDirs)
+    reposWithChanges = filter(lambda repo: hasChanges(repo), repos)
                 
-    if not gitReposFound:
+    if len(repos) == 0:
         print "no git repositories found"
     else:
         if len(reposWithChanges) > 0:
             print "changes detected in:"
         else:
-            print "no changes found"
+            print "\nno changes found"
 
     for repository in reposWithChanges:
         revealRepo(repository, verbose)
