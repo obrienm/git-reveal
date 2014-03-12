@@ -15,8 +15,7 @@ def main():
     summary(repos)
 
 def parse():
-    usage = "usage: git-reveal [options]"
-    parser = OptionParser(usage=usage)
+    parser = OptionParser(usage="usage: git-reveal [options]")
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="show all changed files")
     return parser.parse_args() 
 
