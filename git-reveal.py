@@ -76,14 +76,7 @@ def show(repos, verbose):
     
 
 def execute(command):
-    print subprocess.check_output(command, shell=True).strip()  
- 
-
-def usage():
-    print "usage: git-reveal [-hv]"
-    print "       -v verbose    show all changed files"
-    print "       -h help       show help"
-    sys.exit(2)    
+    print subprocess.check_output(command, shell=True).strip()     
 
 
 if __name__ == "__main__":
