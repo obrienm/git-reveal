@@ -5,29 +5,21 @@
 #
 # Finds all git repositories in the current directory and reveals whether they have any changes to be commit.
 
-import getopt, sys, os, subprocess
-
+import sys, os, subprocess
+from optparse import OptionParser
 
 def main():
-    opts, args = getOpts(sys.argv[1:])
-    verbose = parseOpts(opts)    
+    opts, args = test()
     repos = findRepos()
-    show(repos, verbose)
+    show(repos, opts.verbose)
     summary(repos)
 
 
-def parseOpts(opts):
-    verbose = False
-    for o, a in opts:
-        if o == "-v":
-            verbose = True
-        elif o in ("-h", "--help"):
-            usage()
-        else:
-            assert False, "unhandled option"
-            usage()
-            
-    return verbose
+def test():
+    usage = "usage: git-reveal [options]"
+    parser = OptionParser(usage=usage)
+    parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="show all changed files")
+    return parser.parse_args()
             
 
 def getOpts(argv):
