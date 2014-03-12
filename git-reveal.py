@@ -20,15 +20,7 @@ def parse():
     parser = OptionParser(usage=usage)
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="show all changed files")
     return parser.parse_args()
-            
-
-def getOpts(argv):
-    try:
-        return getopt.getopt(argv, "hv", ["help", "verbose"])
-    except getopt.GetoptError as err:
-        print str(err)
-        usage()
-
+ 
 
 def findRepos():
     dic = os.walk('.').next()
