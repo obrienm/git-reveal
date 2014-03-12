@@ -9,13 +9,13 @@ import sys, os, subprocess
 from optparse import OptionParser
 
 def main():
-    opts, args = test()
+    opts, args = parse()
     repos = findRepos()
     show(repos, opts.verbose)
     summary(repos)
 
 
-def test():
+def parse():
     usage = "usage: git-reveal [options]"
     parser = OptionParser(usage=usage)
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="show all changed files")
