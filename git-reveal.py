@@ -17,7 +17,6 @@ def main():
 def parse():
     parser = OptionParser(usage="usage: git reveal [options]")
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="show all changed files")
-    parser.add_option("--version", action="store_true", dest="verbose", help="show the version")
     return parser.parse_args() 
 
 def findRepos():
