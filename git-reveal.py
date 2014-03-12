@@ -64,6 +64,5 @@ def show(repos, verbose):
 def execute(command):
     print subprocess.check_output(command, shell=True).strip()     
 
-
 if __name__ == "__main__":
     main()
