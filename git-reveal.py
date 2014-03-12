@@ -11,7 +11,7 @@ import getopt, sys, os, subprocess
 def main():
     opts, args = getOpts(sys.argv[1:])
     verbose = parseOpts(opts)    
-    repos = findRepos(verbose)
+    repos = findRepos()
     show(repos, verbose)
     summary(repos)
 
@@ -38,7 +38,7 @@ def getOpts(argv):
         usage()
 
 
-def findRepos(verbose):
+def findRepos():
     dic = os.walk('.').next()
     root = dic[0]        
     dirs = dic[1]
