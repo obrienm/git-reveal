@@ -34,7 +34,7 @@ def hasChanges(repo):
     command = "cd '" + repo + "'; git status -b"
     output = subprocess.check_output(command, shell=True)
     
-    if "nothing to commit, working directory clean" in output:
+    if "nothing to commit" in output:
         return False
     else:
         return True    
