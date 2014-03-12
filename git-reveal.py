@@ -14,13 +14,11 @@ def main():
     show(repos, opts.verbose)
     summary(repos)
 
-
 def parse():
     usage = "usage: git-reveal [options]"
     parser = OptionParser(usage=usage)
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose", help="show all changed files")
-    return parser.parse_args()
- 
+    return parser.parse_args() 
 
 def findRepos():
     dic = os.walk('.').next()
@@ -30,10 +28,8 @@ def findRepos():
 
     return filter(lambda dir: os.path.exists(dir + "/.git"), dirs)
 
-
 def findReposWithChanges(repos):
     return filter(lambda repo: hasChanges(repo), repos)
-
 
 def hasChanges(repo): 
     command = "cd '" + repo + "'; git status -b"
@@ -43,7 +39,6 @@ def hasChanges(repo):
         return False
     else:
         return True    
-
 
 def summary(repos):
     reposWithChanges = findReposWithChanges(repos)
@@ -66,7 +61,6 @@ def show(repos, verbose):
             command = 'echo "' + repo + '"'
             execute(command)
     
-
 def execute(command):
     print subprocess.check_output(command, shell=True).strip()     
 
