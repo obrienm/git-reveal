@@ -1,10 +1,10 @@
 # git-reveal
 
-**git-reveal** finds all the git repositories in the current directory and reveals whether they have any changes to be commit.
+**git reveal** finds all the git repositories in the current directory and reveals whether they have any changes to be commit.
 
 ## Example
 
-	$ git-reveal
+	$ git reveal
 	repo1
 	repo2 [changed]
 	repo3 [changed]
@@ -12,7 +12,7 @@
 		
 Verbose
 	
-	$ git-reveal -v
+	$ git reveal -v
 	repo1
 	repo2 [changed]
 	M README.md
