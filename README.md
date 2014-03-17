@@ -7,7 +7,7 @@
 	$ git reveal
 	repo1
 	repo2 [1 change]
-	repo3 [1 changes]
+	repo3 [1 change]
 	summary: 3 repositories, 2 with changes
 		
 Verbose
