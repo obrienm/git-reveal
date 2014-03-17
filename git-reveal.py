@@ -51,17 +51,18 @@ def summary(repos):
 def show(repos, verbose):
     for repo in repos:
         if hasChanges(repo):
-            rChanges = repoChanges(repo)
-            changeCount = len(rChanges.split('\n'))
+            rChanges = repoChanges(repo).split('\n')
             changeStr = 'changes'
-            if changeCount == 1:
+            if len(rChanges) == 1:
                 changeStr = 'change'
             
-            command = 'echo "$(tput setaf 1)' + repo + ' [' + str(changeCount) + ' ' + changeStr + '] $(tput sgr0)"'
+            command = 'echo "$(tput setaf 1)' + repo + ' [' + str(len(rChanges)) + ' ' + changeStr + '] $(tput sgr0)"'
             print execute(command)
             
             if verbose:
-                print rChanges
+                for rChange in rChanges:
+                    print("  " + rChange)
+
         else:
             command = 'echo "' + repo + '"'
             print execute(command)
