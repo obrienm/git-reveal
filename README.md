@@ -6,18 +6,18 @@
 
 	$ git reveal
 	repo1
-	repo2 [changed]
-	repo3 [changed]
+	repo2 [1 change]
+	repo3 [1 changes]
 	summary: 3 repositories, 2 with changes
 		
 Verbose
 	
 	$ git reveal -v
 	repo1
-	repo2 [changed]
-	M README.md
-	repo3 [changed]
-	?? somefile
+	repo2 [1 change]
+	 M README.md
+	repo3 [1 change]
+	 ?? somefile
 	summary: 3 repositories, 2 with changes
 	
 ## Install
