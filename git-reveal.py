@@ -54,7 +54,7 @@ def show(repos, verbose):
             command = 'echo "$(tput setaf 1)' + repo + ' [changed] $(tput sgr0)"'
             execute(command)
             if verbose:
-                command = "cd '" + repo + "'; git status -s"
+                command = "cd '" + repo + "'; git status --porcelain"
                 execute(command)
         else:
             command = 'echo "' + repo + '"'
