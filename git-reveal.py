@@ -31,7 +31,8 @@ def findReposWithChanges(repos):
     return filter(lambda repo: hasChanges(repo), repos)
 
 def hasChanges(repo): 
-    output = repoChanges(repo)
+    command = "cd '" + repo + "'; git status -b"
+    output = subprocess.check_output(command, shell=True)
     
     if "nothing to commit" in output:
         return False
