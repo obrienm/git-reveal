@@ -46,22 +46,32 @@ def summary(repos):
         repStr = "repository"
     
     command = 'echo "summary: ' + str(len(repos)) + ' ' + repStr + ', ' + str(len(reposWithChanges)) + ' with changes"'
-    execute(command)
+    print execute(command)
 
 def show(repos, verbose):
     for repo in repos:
         if hasChanges(repo):
-            command = 'echo "$(tput setaf 1)' + repo + ' [changed] $(tput sgr0)"'
-            execute(command)
+            rChanges = repoChanges(repo)
+            changeCount = len(rChanges.split('\n'))
+            changeStr = 'changes'
+            if changeCount == 1:
+                changeStr = 'change'
+            
+            command = 'echo "$(tput setaf 1)' + repo + ' [' + str(changeCount) + ' ' + changeStr + '] $(tput sgr0)"'
+            print execute(command)
+            
             if verbose:
-                command = "cd '" + repo + "'; git status --porcelain"
-                execute(command)
+                print rChanges
         else:
             command = 'echo "' + repo + '"'
-            execute(command)
-    
+            print execute(command)
+
+def repoChanges(repo):
+    command = "cd '" + repo + "'; git status --porcelain"
+    return execute(command)
+
 def execute(command):
-    print subprocess.check_output(command, shell=True).strip()     
+    return subprocess.check_output(command, shell=True).strip()     
 
 if __name__ == "__main__":
     main()
