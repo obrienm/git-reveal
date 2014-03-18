@@ -60,7 +60,7 @@ def show(repos, verbose):
             
             if verbose:
                 for rChange in rChanges:
-                    print("  " + rChange)
+                    print("  " + rChange.strip())
 
         else:
             command = 'echo "' + repo + '"'
