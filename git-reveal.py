@@ -44,10 +44,19 @@ def summary(repos):
     if len(repos) == 1:
         repStr = "repository"
     
+    command = 'echo "----------------------------------------"'
+    print execute(command)    
     command = 'echo "summary: ' + str(len(repos)) + ' ' + repStr + ', ' + str(len(reposWithChanges)) + ' with changes"'
+    print execute(command)
+    command = 'echo "----------------------------------------"'
     print execute(command)
 
 def show(repos, verbose):
+    if len(repos) >= 1:
+        print execute('echo " ------------------"')        
+        print execute('echo " repositories found"')        
+        print execute('echo " ------------------"')        
+
     for repo in repos:
         if hasChanges(repo):
             rChanges = repoChanges(repo).split('\n')
@@ -55,7 +64,7 @@ def show(repos, verbose):
             if len(rChanges) == 1:
                 changeStr = 'change'
             
-            command = 'echo "$(tput setaf 1)' + repo + ' [' + str(len(rChanges)) + ' ' + changeStr + '] $(tput sgr0)"'
+            command = 'echo " $(tput setaf 1)' + repo + ' [' + str(len(rChanges)) + ' ' + changeStr + '] $(tput sgr0)"'
             print execute(command)
             
             if verbose:
@@ -63,7 +72,7 @@ def show(repos, verbose):
                     print("  " + rChange.strip())
 
         else:
-            command = 'echo "' + repo + '"'
+            command = 'echo " ' + repo + '"'
             print execute(command)
 
 def repoChanges(repo):
